@@ -13,8 +13,36 @@ def get_recs(title,top_n=3):
     return recs
 
 def load_css():
-    with open('style.css') as f:
-        st.markdown(f"""<style> {f.read()}
+    
+        st.markdown(f"""<style>
+                                @font-face {{
+                                            font-family: 'Noto Nastaleeq Urdu';
+                                            src: url('fonts/NotoNastaliqUrdu-VariableFont_wght.ttf');
+                                            }}
+                                .urdu-text {{
+                                font-family: 'Noto Nastaleeq Urdu', sans-serif;
+                                direction: rtl;
+                                text-align: justify;
+                                ont-size: 20px;
+                                line-height: 2;
+                                }}
+                                .title {{
+                                text-align: right;
+                                line-height: 2;
+                                }}
+                                .subheader {{
+                                text-align: right;
+                                line-height: 2;
+                                }}
+                                .stButton button:first-child {{
+                                text-align: right;
+                                height: 75px;
+                                width: 225px;
+                                }}
+                                .button-container {{
+                                display: flex;
+                                justify-content: flex-end;
+                                }}
                         </style>""", unsafe_allow_html=True)
         
 def get_ghazal(title):
