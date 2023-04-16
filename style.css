@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Noto Nastaleeq Urdu';
+  src: url('fonts/NotoNastaliqUrdu-VariableFont_wght.ttf');
+}
+
+.urdu-text {
+  font-family: 'Noto Nastaleeq Urdu', sans-serif;
+  direction: rtl;
+  text-align: justify;
+}
