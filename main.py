@@ -15,27 +15,6 @@ def get_recs(title,top_n=3):
 def load_css():
     with open('style.css') as f:
         st.markdown(f"""<style> {f.read()}
-                        .urdu-text {{
-                                        font-size: 20px;
-                                        line-height: 2;
-                                    }}
-                        .title {{
-                                    text-align: right;
-                                    line-height: 2;
-                                }}
-                        .subheader {{
-                                    text-align: right;
-                                    line-height: 2;
-                                }}
-                        .stButton button:first-child {{
-                                    text-align: right;
-                                    height: 75px;
-                                    width: 225px;
-                                }}
-                        .button-container {{
-                                    display: flex;
-                                    justify-content: flex-end;
-                                }}
                         </style>""", unsafe_allow_html=True)
         
 def get_ghazal(title):

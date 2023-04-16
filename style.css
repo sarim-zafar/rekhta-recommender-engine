@@ -7,4 +7,23 @@
   font-family: 'Noto Nastaleeq Urdu', sans-serif;
   direction: rtl;
   text-align: justify;
+  font-size: 20px;
+  line-height: 2;
 }
+.title {{
+text-align: right;
+line-height: 2;
+}}
+.subheader {{
+text-align: right;
+line-height: 2;
+}}
+.stButton button:first-child {{
+text-align: right;
+height: 75px;
+width: 225px;
+}}
+.button-container {{
+display: flex;
+justify-content: flex-end;
+}}
