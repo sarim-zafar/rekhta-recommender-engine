@@ -17,10 +17,10 @@ def load_css():
         st.markdown(f"""<style>
                                 @font-face {{
                                             font-family: 'Noto Nastaleeq Urdu';
-                                            src: url('fonts/NotoNastaliqUrdu-VariableFont_wght.ttf');
+                                            src: 'fonts/NotoNastaliqUrdu-VariableFont_wght.ttf';
                                             }}
-                                .urdu-text {{
-                                font-family: 'Noto Nastaleeq Urdu', sans-serif;
+                                html, body, [class*="css"] {{
+                                font-family: 'Noto Nastaleeq Urdu';
                                 direction: rtl;
                                 text-align: justify;
                                 ont-size: 20px;
@@ -102,12 +102,12 @@ if __name__ == "__main__":
     st.set_page_config(
     page_title="Ghazal Recommender",
     page_icon=":smiley:",
-    initial_sidebar_state="expanded",
+    # initial_sidebar_state="expanded",
     )
     decrypt_data()
     #prep app
     load_css()
     df = pd.read_parquet('data/data.parquet')
     
-    selectbox_01 = st.sidebar.selectbox('Select Ghazal', df['title'].to_list(),key='selected_ghazal')
+    selectbox_01 = st.sidebar.selectbox(' انتخاب شدہ غزل ', df['title'].to_list(),key='selected_ghazal')
     run_app()
