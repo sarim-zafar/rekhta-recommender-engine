@@ -2,18 +2,18 @@ import streamlit as st
 import pandas as pd
 import pyzipper
 
+@st.cache_data()
 def get_recs(title,top_n=3):
     sub_df=df[df['title']==title]
     recs=[]
     for i in range(top_n):
         idx=int(sub_df['top_'+str(i+1)])
-        # print('hello',idx)
-        # print(df.iloc[idx])
         recs.append(df.iloc[idx]['title'])
     return recs
 
+# @st.cache_resource()
 def load_css():
-    
+        print('css ran')
         st.markdown(f"""<style>
                                 @font-face {{
                                             font-family: 'Noto Nastaleeq Urdu';
@@ -45,14 +45,16 @@ def load_css():
                                 }}
                         </style>""", unsafe_allow_html=True)
         
+@st.cache_data()        
 def get_ghazal(title):
     return df[df['title']==title]
+
 
 def set_ghazal(title):
     st.session_state.selected_ghazal = title
     return
-def run_app():
 
+def run_app():
     # st.title("Ghazal Recommender")
     ghazal_title_placeholder= st.empty()
     st.write("---")
@@ -98,16 +100,26 @@ def decrypt_data():
                 with open(name, 'wb') as f_out:
                     f_out.write(data)
     return 1
-if __name__ == "__main__":
-    st.set_page_config(
+
+@st.cache_data
+def load_data():
+    print('it ran')
+    decrypt_data()
+    df = pd.read_parquet('data/data.parquet')
+    df=df.sample(frac=1.0)
+    return df
+
+st.set_page_config(
     page_title="Ghazal Recommender",
     page_icon=":smiley:",
     # initial_sidebar_state="expanded",
     )
-    decrypt_data()
-    #prep app
-    load_css()
-    df = pd.read_parquet('data/data.parquet')
-    
-    selectbox_01 = st.sidebar.selectbox(' انتخاب شدہ غزل ', df['title'].to_list(),key='selected_ghazal')
+
+#prep app
+load_css()
+df=load_data()
+
+
+selectbox_01 = st.sidebar.selectbox(' انتخاب شدہ غزل ', df['title'].to_list(),key='selected_ghazal')
+if __name__ == "__main__":
     run_app()
