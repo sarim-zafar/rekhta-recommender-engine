@@ -66,7 +66,7 @@ def run_app():
     urdu_text=tmp_df['text'].to_list()[0].replace('\n','<br>')
     # print(len(urdu_text))
     # Display the Urdu text with increased font size and line spacing
-    ghazal_placeholder.markdown(f'<p class="urdu-text">{urdu_text}</p>',
+    ghazal_placeholder.markdown(f'<h5 class="urdu-text">{urdu_text}</h5>',
                                  unsafe_allow_html=True)
     
 
