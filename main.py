@@ -13,7 +13,7 @@ def get_recs(title,top_n=3):
 
 # @st.cache_resource()
 def load_css():
-        print('css ran')
+        # print('css ran')
         st.markdown(f"""<style>
                                 @font-face {{
                                             font-family: 'Noto Nastaleeq Urdu';
@@ -45,7 +45,7 @@ def load_css():
                                 }}
                         </style>""", unsafe_allow_html=True)
         
-@st.cache_data()        
+      
 def get_ghazal(title):
     return df[df['title']==title]
 
@@ -61,6 +61,7 @@ def run_app():
     ghazal_placeholder = st.empty()
     tmp_df=get_ghazal(selectbox_01)
     title=tmp_df['title'].to_list()[0]
+    st.session_state.default_idx=int(tmp_df.index.values)
     ghazal_title_placeholder.markdown(f'<h1 class="title">{title}</h1>', unsafe_allow_html=True)
     urdu_text=tmp_df['text'].to_list()[0].replace('\n','<br>')
     # print(len(urdu_text))
@@ -103,10 +104,9 @@ def decrypt_data():
 
 @st.cache_data
 def load_data():
-    print('it ran')
+    # print('it ran')
     decrypt_data()
     df = pd.read_parquet('data/data.parquet')
-    df=df.sample(frac=1.0)
     return df
 
 st.set_page_config(
@@ -119,7 +119,12 @@ st.set_page_config(
 load_css()
 df=load_data()
 
+#this will randomly select a ghazal to display 
+if 'default_idx' not in st.session_state:
+    st.session_state.default_idx=int(df.sample(1).index.values)
 
-selectbox_01 = st.sidebar.selectbox(' انتخاب شدہ غزل ', df['title'].to_list(),key='selected_ghazal')
+selectbox_01 = st.sidebar.selectbox(' انتخاب شدہ غزل ', df['title'].to_list(),
+                                    index=st.session_state.default_idx,key='selected_ghazal')
+
 if __name__ == "__main__":
     run_app()

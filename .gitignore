@@ -156,3 +156,4 @@ data/.DS_Store
 *.parquet
 *.toml
 *.ipynb
+*.json
