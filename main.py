@@ -57,12 +57,14 @@ def set_ghazal(title):
 def run_app():
     # st.title("Ghazal Recommender")
     ghazal_title_placeholder= st.empty()
+    author_placeholder=st.empty()
     st.write("---")
     ghazal_placeholder = st.empty()
     tmp_df=get_ghazal(selectbox_01)
     title=tmp_df['title'].to_list()[0]
     st.session_state.default_idx=int(tmp_df.index.values)
     ghazal_title_placeholder.markdown(f'<h1 class="title">{title}</h1>', unsafe_allow_html=True)
+    author_placeholder.markdown(f'<h6 class="title">{tmp_df.author.to_list()[0]}</h6>', unsafe_allow_html=True)
     urdu_text=tmp_df['text'].to_list()[0].replace('\n','<br>')
     # print(len(urdu_text))
     # Display the Urdu text with increased font size and line spacing
@@ -106,7 +108,7 @@ def decrypt_data():
 def load_data():
     # print('it ran')
     decrypt_data()
-    df = pd.read_parquet('data/data.parquet')
+    df = pd.read_parquet('data_rekhta.parquet')
     return df
 
 st.set_page_config(
